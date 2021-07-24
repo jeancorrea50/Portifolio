@@ -1,0 +1,73 @@
+﻿@model Portifolio.Models.NotaFiscal
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>NotaFiscal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumeroNf" class="control-label"></label>
+                <input asp-for="NumeroNf" class="form-control" />
+                <span asp-validation-for="NumeroNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SerieNf" class="control-label"></label>
+                <input asp-for="SerieNf" class="form-control" />
+                <span asp-validation-for="SerieNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RemetenteNf" class="control-label"></label>
+                <input asp-for="RemetenteNf" class="form-control" />
+                <span asp-validation-for="RemetenteNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinatarioNf" class="control-label"></label>
+                <input asp-for="DestinatarioNf" class="form-control" />
+                <span asp-validation-for="DestinatarioNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataEmissaoNf" class="control-label"></label>
+                <input asp-for="DataEmissaoNf" class="form-control" />
+                <span asp-validation-for="DataEmissaoNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorNf" class="control-label"></label>
+                <input asp-for="ValorNf" class="form-control" />
+                <span asp-validation-for="ValorNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoNf" class="control-label"></label>
+                <input asp-for="ProdutoNf" class="form-control" />
+                <span asp-validation-for="ProdutoNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PesoNf" class="control-label"></label>
+                <input asp-for="PesoNf" class="form-control" />
+                <span asp-validation-for="PesoNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantidadeNf" class="control-label"></label>
+                <input asp-for="QuantidadeNf" class="form-control" />
+                <span asp-validation-for="QuantidadeNf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
