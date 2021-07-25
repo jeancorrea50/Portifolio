@@ -36,9 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PesoNf)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantidadeNf)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -70,7 +68,7 @@
                 @Html.DisplayFor(modelItem => item.PesoNf)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuantidadeNf)
+                @Html.DisplayFor(modelItem => item.PesoNf)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

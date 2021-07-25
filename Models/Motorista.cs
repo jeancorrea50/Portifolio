@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,13 +9,38 @@ namespace Portifolio.Models
     public class Motorista
     {
         public int ID { get; set; }
+
+        [Required(ErrorMessage = "Este campo é obrigatório")]
+        [Display(Name = "Nome Completo")]
         public string NomeCompletoMot { get; set; }
+
+        [Required(ErrorMessage = "Este campo é obrigatório")]
+        [Display(Name = "Cpf")]
+
         public int CpfMot { get; set; }
 
+
+
+        [Required(ErrorMessage = "Este campo é obrigatório")]
+        [Display(Name = "Email")]
         public string EmailMot { get; set; }
-        public DateTime DataNascimentoMot { get; set; }
+
+
+
+  
+
+        [Display(Name = "Data Nascimento")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+
+        public string? DataNascimentoMot { get; set; }
+    
 
         // (Propriedade de navegação de referencia) Indico que Motorista está ligado a Veiculo, e que cada Motorista precisa ter um Veiculo vinculado.
+
         public Veiculo Veiculo { get; set; }
     }
+
 }
+
+
+

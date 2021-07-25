@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Portifolio.Data;
 
 namespace Portifolio.Migrations
 {
     [DbContext(typeof(IAgendamentoDbContext))]
-    partial class AgendamentoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210725043427_agendamentoV02")]
+    partial class agendamentoV02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,11 @@ namespace Portifolio.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailMot")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeCompletoMot")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("VeiculoID")
@@ -59,7 +63,11 @@ namespace Portifolio.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DestinatarioNf")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MotoristaID")
+                        .HasColumnType("int");
 
                     b.Property<int>("NumeroNf")
                         .HasColumnType("int");
@@ -68,24 +76,25 @@ namespace Portifolio.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("ProdutoNf")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("QuantidadeNf")
-                        .HasColumnType("float");
-
                     b.Property<string>("RemetenteNf")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SerieNf")
                         .HasColumnType("int");
 
-                    b.Property<double>("ValorNf")
-                        .HasColumnType("float");
+                    b.Property<decimal>("ValorNf")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("VeiculoID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("MotoristaID");
 
                     b.HasIndex("VeiculoID");
 
@@ -99,16 +108,26 @@ namespace Portifolio.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("CapacidadeLiquidaVeic")
+                    b.Property<double>("CapacidadeVeic")
                         .HasColumnType("float");
 
                     b.Property<string>("MarcaVeic")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModeloVeic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlacaCarre1Veic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlacaCarre2Veic")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PlacaVeic")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -119,7 +138,7 @@ namespace Portifolio.Migrations
             modelBuilder.Entity("Portifolio.Models.Motorista", b =>
                 {
                     b.HasOne("Portifolio.Models.Veiculo", "Veiculo")
-                        .WithMany("Motorista")
+                        .WithMany()
                         .HasForeignKey("VeiculoID");
 
                     b.Navigation("Veiculo");
@@ -127,17 +146,19 @@ namespace Portifolio.Migrations
 
             modelBuilder.Entity("Portifolio.Models.NotaFiscal", b =>
                 {
-                    b.HasOne("Portifolio.Models.Veiculo", "Veiculo")
+                    b.HasOne("Portifolio.Models.Motorista", "Motorista")
+                        .WithMany()
+                        .HasForeignKey("MotoristaID");
+
+                    b.HasOne("Portifolio.Models.Veiculo", null)
                         .WithMany("NotaFiscal")
                         .HasForeignKey("VeiculoID");
 
-                    b.Navigation("Veiculo");
+                    b.Navigation("Motorista");
                 });
 
             modelBuilder.Entity("Portifolio.Models.Veiculo", b =>
                 {
-                    b.Navigation("Motorista");
-
                     b.Navigation("NotaFiscal");
                 });
 #pragma warning restore 612, 618
