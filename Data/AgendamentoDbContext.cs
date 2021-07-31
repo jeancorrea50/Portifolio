@@ -12,6 +12,7 @@ namespace Portifolio.Data
         public DbSet<Motorista> Motoristas { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
         public DbSet<NotaFiscal> NotaFiscal { get; set; }
+        public DbSet<Agenda> Agenda { get; set; }
 
         // String de conexão com o Banco de dados (SQL)
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

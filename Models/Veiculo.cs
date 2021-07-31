@@ -46,8 +46,11 @@ namespace Portifolio.Models
         public double CapacidadeVeic { get; set; }
 
 
-        // (Propriedade de navegação de coleção) Estou indicando que o Veiculo pode possuir varias notas fiscais
-        
-        public ICollection<NotaFiscal> NotaFiscal { get; set; }
+     
+
+
+        // (Propriedade de navegação de referencia) Indico que Veiculos está ligado um motorista, e que cada Motorista precisa ter um Veiculo vinculado.
+        public Agenda Agenda { get; set; }
+
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Portifolio.Data;
 
 namespace Portifolio.Migrations
 {
     [DbContext(typeof(IAgendamentoDbContext))]
-    partial class AgendamentoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210731001816_AgendamentoV03")]
+    partial class AgendamentoV03
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

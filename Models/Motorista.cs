@@ -19,25 +19,32 @@ namespace Portifolio.Models
 
         public int CpfMot { get; set; }
 
-
+        [Required(ErrorMessage = "Este campo é obrigatório")]
+        [Display(Name = "Telefone")]
+        [Phone]
+        public int TelefoneMot { get; set; }
 
         [Required(ErrorMessage = "Este campo é obrigatório")]
         [Display(Name = "Email")]
+        [EmailAddress]
         public string EmailMot { get; set; }
 
 
 
-  
+
 
         [Display(Name = "Data Nascimento")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
 
         public string? DataNascimentoMot { get; set; }
-    
 
-        // (Propriedade de navegação de referencia) Indico que Motorista está ligado a Veiculo, e que cada Motorista precisa ter um Veiculo vinculado.
 
-        public Veiculo Veiculo { get; set; }
+
+        // (Propriedade de navegação de coleção) Estou indicando que o Motorista pode possuir varias V
+
+    public ICollection<Veiculo> Veiculo { get; set; }
+
+
     }
 
 }
