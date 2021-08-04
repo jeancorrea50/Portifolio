@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace Portifolio.Models
 {
     public class NotaFiscal
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
 
         [Required(ErrorMessage = "Este campo é obrigatório")]
@@ -56,8 +58,20 @@ namespace Portifolio.Models
         [Display(Name = "Peso Liquido")]
         public double PesoNf { get; set; }
 
+        public Agenda Agenda { get; set; }
+     
+
+
         // (Propriedade de navegação de referencia) Indico que Produtos está ligado a Clientes, e que cada produto precisa ter um cliente vinculado.
-       
-        public Motorista Motorista { get; set; }
+
+
+
+
+
+
+
+
+
+
     }
 }

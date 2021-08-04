@@ -23,6 +23,11 @@
                 <span asp-validation-for="CpfMot" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="TelefoneMot" class="control-label"></label>
+                <input asp-for="TelefoneMot" class="form-control" />
+                <span asp-validation-for="TelefoneMot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="EmailMot" class="control-label"></label>
                 <input asp-for="EmailMot" class="form-control" />
                 <span asp-validation-for="EmailMot" class="text-danger"></span>
@@ -43,6 +48,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

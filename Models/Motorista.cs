@@ -8,7 +8,7 @@ namespace Portifolio.Models
 {
     public class Motorista
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Este campo é obrigatório")]
         [Display(Name = "Nome Completo")]
@@ -36,13 +36,14 @@ namespace Portifolio.Models
         [Display(Name = "Data Nascimento")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
 
-        public string? DataNascimentoMot { get; set; }
+        public DateTime? DataNascimentoMot { get; set; }
 
-
+        public Veiculo Veiculo { get; set; }
+        public int VeiculoId { get; set; }
 
         // (Propriedade de navegação de coleção) Estou indicando que o Motorista pode possuir varias V
 
-    public ICollection<Veiculo> Veiculo { get; set; }
+
 
 
     }

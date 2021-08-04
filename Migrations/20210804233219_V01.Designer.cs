@@ -10,8 +10,8 @@ using Portifolio.Data;
 namespace Portifolio.Migrations
 {
     [DbContext(typeof(IAgendamentoDbContext))]
-    [Migration("20210731001816_AgendamentoV03")]
-    partial class AgendamentoV03
+    [Migration("20210804233219_V01")]
+    partial class V01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,17 +27,17 @@ namespace Portifolio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DataHoraAge")
+                    b.Property<DateTime>("DataHoraAgenda")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Agenda");
+                    b.ToTable("Agendas");
                 });
 
             modelBuilder.Entity("Portifolio.Models.Motorista", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -45,8 +45,8 @@ namespace Portifolio.Migrations
                     b.Property<int>("CpfMot")
                         .HasColumnType("int");
 
-                    b.Property<string>("DataNascimentoMot")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("DataNascimentoMot")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EmailMot")
                         .IsRequired()
@@ -59,14 +59,19 @@ namespace Portifolio.Migrations
                     b.Property<int>("TelefoneMot")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.Property<int>("VeiculoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VeiculoId");
 
                     b.ToTable("Motoristas");
                 });
 
             modelBuilder.Entity("Portifolio.Models.NotaFiscal", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -80,9 +85,6 @@ namespace Portifolio.Migrations
                     b.Property<string>("DestinatarioNf")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MotoristaID")
-                        .HasColumnType("int");
 
                     b.Property<int>("NumeroNf")
                         .HasColumnType("int");
@@ -104,24 +106,19 @@ namespace Portifolio.Migrations
                     b.Property<decimal>("ValorNf")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("AgendaId");
 
-                    b.HasIndex("MotoristaID");
-
-                    b.ToTable("NotaFiscal");
+                    b.ToTable("NotasFiscais");
                 });
 
             modelBuilder.Entity("Portifolio.Models.Veiculo", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<Guid?>("AgendaId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("CapacidadeVeic")
                         .HasColumnType("float");
@@ -134,7 +131,7 @@ namespace Portifolio.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MotoristaID")
+                    b.Property<int>("NotaFiscalId")
                         .HasColumnType("int");
 
                     b.Property<string>("PlacaCarre1Veic")
@@ -148,49 +145,42 @@ namespace Portifolio.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AgendaId");
-
-                    b.HasIndex("MotoristaID");
+                    b.HasIndex("NotaFiscalId");
 
                     b.ToTable("Veiculos");
                 });
 
-            modelBuilder.Entity("Portifolio.Models.NotaFiscal", b =>
+            modelBuilder.Entity("Portifolio.Models.Motorista", b =>
                 {
-                    b.HasOne("Portifolio.Models.Agenda", null)
-                        .WithMany("NotaFiscal")
-                        .HasForeignKey("AgendaId");
-
-                    b.HasOne("Portifolio.Models.Motorista", "Motorista")
+                    b.HasOne("Portifolio.Models.Veiculo", "Veiculo")
                         .WithMany()
-                        .HasForeignKey("MotoristaID");
+                        .HasForeignKey("VeiculoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Motorista");
+                    b.Navigation("Veiculo");
                 });
 
-            modelBuilder.Entity("Portifolio.Models.Veiculo", b =>
+            modelBuilder.Entity("Portifolio.Models.NotaFiscal", b =>
                 {
                     b.HasOne("Portifolio.Models.Agenda", "Agenda")
                         .WithMany()
                         .HasForeignKey("AgendaId");
 
-                    b.HasOne("Portifolio.Models.Motorista", null)
-                        .WithMany("Veiculo")
-                        .HasForeignKey("MotoristaID");
-
                     b.Navigation("Agenda");
                 });
 
-            modelBuilder.Entity("Portifolio.Models.Agenda", b =>
+            modelBuilder.Entity("Portifolio.Models.Veiculo", b =>
                 {
-                    b.Navigation("NotaFiscal");
-                });
+                    b.HasOne("Portifolio.Models.NotaFiscal", "NotaFiscal")
+                        .WithMany()
+                        .HasForeignKey("NotaFiscalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Portifolio.Models.Motorista", b =>
-                {
-                    b.Navigation("Veiculo");
+                    b.Navigation("NotaFiscal");
                 });
 #pragma warning restore 612, 618
         }

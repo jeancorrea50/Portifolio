@@ -12,9 +12,9 @@ namespace Portifolio.Controllers
 {
     public class MotoristasController : Controller
     {
-        private readonly AgendamentoDbContext _context;
+        private readonly IAgendamentoDbContext _context;
 
-        public MotoristasController(AgendamentoDbContext context)
+        public MotoristasController(IAgendamentoDbContext context)
         {
             _context = context;
         }
@@ -34,7 +34,7 @@ namespace Portifolio.Controllers
             }
 
             var motorista = await _context.Motoristas
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (motorista == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Portifolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,NomeCompletoMot,CpfMot,EmailMot,DataNascimentoMot")] Motorista motorista)
+        public async Task<IActionResult> Create([Bind("Id,NomeCompletoMot,CpfMot,TelefoneMot,EmailMot,DataNascimentoMot")] Motorista motorista)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Portifolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,NomeCompletoMot,CpfMot,EmailMot,DataNascimentoMot")] Motorista motorista)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeCompletoMot,CpfMot,TelefoneMot,EmailMot,DataNascimentoMot")] Motorista motorista)
         {
-            if (id != motorista.ID)
+            if (id != motorista.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Portifolio.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MotoristaExists(motorista.ID))
+                    if (!MotoristaExists(motorista.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Portifolio.Controllers
             }
 
             var motorista = await _context.Motoristas
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (motorista == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace Portifolio.Controllers
 
         private bool MotoristaExists(int id)
         {
-            return _context.Motoristas.Any(e => e.ID == id);
+            return _context.Motoristas.Any(e => e.Id == id);
         }
     }
 }

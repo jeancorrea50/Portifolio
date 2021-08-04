@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Portifolio.Models
 {
     public class Veiculo
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
 
         
@@ -45,12 +46,11 @@ namespace Portifolio.Models
         [Display(Name = "Capacidade Peso")]
         public double CapacidadeVeic { get; set; }
 
-
-     
-
+        public NotaFiscal NotaFiscal { get; set; }
+        public int NotaFiscalId { get; set; }
 
         // (Propriedade de navegação de referencia) Indico que Veiculos está ligado um motorista, e que cada Motorista precisa ter um Veiculo vinculado.
-        public Agenda Agenda { get; set; }
+
 
     }
 }
